@@ -1,10 +1,8 @@
 package angelbaby.database.service;
 
 import angelbaby.database.model.Stock;
-import angelbaby.database.model.User;
 import angelbaby.database.repository.ProductRepository;
 import angelbaby.database.repository.StockRepository;
-import angelbaby.database.repository.UserRepository;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,6 +33,16 @@ public class StockService {
         stock.setItem(productRepository.findById(Long.valueOf((Integer) obj.get("itemID"))).get());
         return stockRepository.save(stock);
 
+    }
+
+    public Stock update(String payload) throws ParseException {
+
+        JSONObject obj = new JSONObject(payload);
+        Stock stock = stockRepository.findById(Long.valueOf((Integer) obj.get("stockID"))).get();
+        stock.setExpire(new SimpleDateFormat("dd/MM/yyyy").parse((String) obj.get("expire")));
+        stock.setQuantity((Integer) obj.get("quantity"));
+        stock.setItem(productRepository.findById(Long.valueOf((Integer) obj.get("itemID"))).get());
+        return stockRepository.save(stock);
     }
 
 }

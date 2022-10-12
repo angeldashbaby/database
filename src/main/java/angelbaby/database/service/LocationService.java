@@ -3,7 +3,6 @@ package angelbaby.database.service;
 import angelbaby.database.model.Location;
 import angelbaby.database.model.Product;
 import angelbaby.database.repository.LocationRepository;
-import angelbaby.database.repository.ProductRepository;
 import angelbaby.database.repository.StockRepository;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +26,14 @@ public class LocationService {
     public Location create(String payload) {
         JSONObject obj = new JSONObject(payload);
         Location location = new Location();
+        location.setShelfID((Integer) obj.get("shelfID"));
+        location.setStockID(stockRepository.findById(Long.valueOf((Integer) obj.get("stockID"))).get());
+        return locationRepository.save(location);
+    }
+
+    public Location update(String payload) {
+        JSONObject obj = new JSONObject(payload);
+        Location location = locationRepository.findById(Long.valueOf((Integer) obj.get("locationID"))).get();
         location.setShelfID((Integer) obj.get("shelfID"));
         location.setStockID(stockRepository.findById(Long.valueOf((Integer) obj.get("stockID"))).get());
         return locationRepository.save(location);

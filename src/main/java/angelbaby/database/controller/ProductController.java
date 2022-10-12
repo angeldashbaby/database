@@ -23,4 +23,9 @@ public class ProductController {
     public Product create(@RequestBody String payload) {
         return service.create(payload);
     }
+
+    @PutMapping
+    public Product update(@RequestBody String payload) {
+        return service.update(payload);
+    }
 }

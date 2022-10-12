@@ -1,8 +1,6 @@
 package angelbaby.database.controller;
 
-import angelbaby.database.model.Product;
 import angelbaby.database.model.User;
-import angelbaby.database.service.ProductService;
 import angelbaby.database.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,5 +22,10 @@ public class UserController {
     @PostMapping
     public User create(@RequestBody String payload) {
         return service.create(payload);
+    }
+
+    @PutMapping
+    public User update(@RequestBody String payload) {
+        return service.update(payload);
     }
 }

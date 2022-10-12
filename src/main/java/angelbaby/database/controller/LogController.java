@@ -1,9 +1,7 @@
 package angelbaby.database.controller;
 
 import angelbaby.database.model.Log;
-import angelbaby.database.model.Stock;
 import angelbaby.database.service.LogService;
-import angelbaby.database.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

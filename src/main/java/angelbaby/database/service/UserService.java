@@ -1,8 +1,6 @@
 package angelbaby.database.service;
 
-import angelbaby.database.model.Product;
 import angelbaby.database.model.User;
-import angelbaby.database.repository.ProductRepository;
 import angelbaby.database.repository.UserRepository;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +23,15 @@ public class UserService {
 
         JSONObject obj = new JSONObject(payload);
         User user = new User();
+        user.setUsername((String) obj.get("username"));
+        user.setPassword((String) obj.get("password"));
+        return userRepository.save(user);
+    }
+
+    public User update(String payload) {
+
+        JSONObject obj = new JSONObject(payload);
+        User user = userRepository.findById(Long.valueOf((Integer) obj.get("userID"))).get();
         user.setUsername((String) obj.get("username"));
         user.setPassword((String) obj.get("password"));
         return userRepository.save(user);
