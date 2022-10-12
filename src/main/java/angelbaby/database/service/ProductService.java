@@ -18,9 +18,6 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    @Autowired
-    private LocationRepository locationRepository;
-
     public List<Product> getAll() {
         return productRepository.findAll();
     }
@@ -32,7 +29,6 @@ public class ProductService {
         product.setName((String) obj.get("name"));
         product.setDescription((String) obj.get("description"));
         product.setSupplierName((String) obj.get("supplierName"));
-        product.setLocation(locationRepository.findById(Long.valueOf((Integer) obj.get("locationID"))).get());
         return productRepository.save(product);
     }
 

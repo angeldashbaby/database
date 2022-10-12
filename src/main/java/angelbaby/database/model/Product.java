@@ -20,8 +20,4 @@ public class Product {
     private String description;
     private String supplierName;
 
-    @OneToOne(targetEntity = Location.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "locationID", referencedColumnName = "locationID")
-    private Location location;
-
 }
