@@ -32,9 +32,9 @@ public class ProductService {
 
         JSONObject obj = new JSONObject(payload);
         Product product = productRepository.findById(Long.valueOf((Integer) obj.get("itemID"))).get();
-        product.setName((String) obj.get("name"));
-        product.setDescription((String) obj.get("description"));
-        product.setSupplierName((String) obj.get("supplierName"));
+        if (obj.has("name")) product.setName((String) obj.get("name"));
+        if (obj.has("description")) product.setDescription((String) obj.get("description"));
+        if (obj.has("supplierName")) product.setSupplierName((String) obj.get("supplierName"));
         return productRepository.save(product);
     }
 

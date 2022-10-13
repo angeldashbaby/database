@@ -27,15 +27,15 @@ public class LocationService {
         JSONObject obj = new JSONObject(payload);
         Location location = new Location();
         location.setShelfID((Integer) obj.get("shelfID"));
-        location.setStockID(stockRepository.findById(Long.valueOf((Integer) obj.get("stockID"))).get());
+        if (obj.has("stockID")) location.setStockID(stockRepository.findById(Long.valueOf((Integer) obj.get("stockID"))).get());
         return locationRepository.save(location);
     }
 
     public Location update(String payload) {
         JSONObject obj = new JSONObject(payload);
         Location location = locationRepository.findById(Long.valueOf((Integer) obj.get("locationID"))).get();
-        location.setShelfID((Integer) obj.get("shelfID"));
-        location.setStockID(stockRepository.findById(Long.valueOf((Integer) obj.get("stockID"))).get());
+        if (obj.has("shelfID")) location.setShelfID((Integer) obj.get("shelfID"));
+        if (obj.has("stockID")) location.setStockID(stockRepository.findById(Long.valueOf((Integer) obj.get("stockID"))).get());
         return locationRepository.save(location);
     }
 }

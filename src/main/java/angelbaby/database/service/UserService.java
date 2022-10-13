@@ -32,8 +32,8 @@ public class UserService {
 
         JSONObject obj = new JSONObject(payload);
         User user = userRepository.findById(Long.valueOf((Integer) obj.get("userID"))).get();
-        user.setUsername((String) obj.get("username"));
-        user.setPassword((String) obj.get("password"));
+        if (obj.has("username")) user.setUsername((String) obj.get("username"));
+        if (obj.has("password")) user.setPassword((String) obj.get("password"));
         return userRepository.save(user);
     }
 
