@@ -1,9 +1,11 @@
 package angelbaby.database.service;
 
+import angelbaby.database.model.LoginCheck;
 import angelbaby.database.model.User;
 import angelbaby.database.repository.UserRepository;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,6 +38,43 @@ public class UserService {
 
     public User findByID(Long id) {
         return userRepository.findById(id).get();
+    }
+
+    public LoginCheck login(String payload) {
+        JSONObject obj = new JSONObject(payload);
+        LoginCheck response = new LoginCheck();
+        String username = null;
+        String password = null;
+        if (obj.has("username")) username = (String) obj.get("username");
+        if (obj.has("password")) password = (String) obj.get("password");
+
+        if (username == null) {
+            response.setSuccess(false);
+            response.setError("Missing input \"username\"");
+            return response;
+        }
+        if (password == null) {
+            response.setSuccess(false);
+            response.setError("Missing input \"password\"");
+            return response;
+        }
+
+        User user = userRepository.findByUsername(username);
+
+        if (user == null) {
+            response.setSuccess(false);
+            response.setError("User not found");
+            return response;
+        }
+        if (!user.getPassword().equals(password)) {
+            response.setSuccess(false);
+            response.setError("Password doesn't match");
+            return response;
+        }
+
+        response.setSuccess(true);
+        response.setError("");
+        return response;
     }
 
 }
