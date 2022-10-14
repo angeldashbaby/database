@@ -14,13 +14,11 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-
     public List<User> getAll() {
         return userRepository.findAll();
     }
 
     public User create(String payload) {
-
         JSONObject obj = new JSONObject(payload);
         User user = new User();
         user.setUsername((String) obj.get("username"));
@@ -29,12 +27,15 @@ public class UserService {
     }
 
     public User update(String payload) {
-
         JSONObject obj = new JSONObject(payload);
         User user = userRepository.findById(Long.valueOf((Integer) obj.get("userID"))).get();
         if (obj.has("username")) user.setUsername((String) obj.get("username"));
         if (obj.has("password")) user.setPassword((String) obj.get("password"));
         return userRepository.save(user);
+    }
+
+    public User findByID(Long id) {
+        return userRepository.findById(id).get();
     }
 
 }

@@ -1,7 +1,6 @@
 package angelbaby.database.service;
 
 import angelbaby.database.model.Location;
-import angelbaby.database.model.Product;
 import angelbaby.database.repository.LocationRepository;
 import angelbaby.database.repository.StockRepository;
 import org.json.JSONObject;
@@ -37,5 +36,9 @@ public class LocationService {
         if (obj.has("shelfID")) location.setShelfID((Integer) obj.get("shelfID"));
         if (obj.has("stockID")) location.setStockID(stockRepository.findById(Long.valueOf((Integer) obj.get("stockID"))).get());
         return locationRepository.save(location);
+    }
+
+    public Location findByID(Long id) {
+        return locationRepository.findById(id).get();
     }
 }

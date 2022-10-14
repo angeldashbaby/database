@@ -1,5 +1,6 @@
 package angelbaby.database.controller;
 
+import angelbaby.database.model.Location;
 import angelbaby.database.model.Product;
 import angelbaby.database.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,10 @@ public class ProductController {
     @PutMapping
     public Product update(@RequestBody String payload) {
         return service.update(payload);
+    }
+
+    @GetMapping("/{id}")
+    public Product findByID(@PathVariable Long id) {
+        return service.findByID(id);
     }
 }

@@ -1,5 +1,6 @@
 package angelbaby.database.controller;
 
+import angelbaby.database.model.Location;
 import angelbaby.database.model.User;
 import angelbaby.database.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,10 @@ public class UserController {
     @PutMapping
     public User update(@RequestBody String payload) {
         return service.update(payload);
+    }
+
+    @GetMapping("/{id}")
+    public User findByID(@PathVariable Long id) {
+        return service.findByID(id);
     }
 }

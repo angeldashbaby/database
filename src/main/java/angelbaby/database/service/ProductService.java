@@ -19,7 +19,6 @@ public class ProductService {
     }
 
     public Product create(String payload) {
-
         JSONObject obj = new JSONObject(payload);
         Product product = new Product();
         product.setName((String) obj.get("name"));
@@ -29,13 +28,16 @@ public class ProductService {
     }
 
     public Product update(String payload) {
-
         JSONObject obj = new JSONObject(payload);
         Product product = productRepository.findById(Long.valueOf((Integer) obj.get("itemID"))).get();
         if (obj.has("name")) product.setName((String) obj.get("name"));
         if (obj.has("description")) product.setDescription((String) obj.get("description"));
         if (obj.has("supplierName")) product.setSupplierName((String) obj.get("supplierName"));
         return productRepository.save(product);
+    }
+
+    public Product findByID(Long id) {
+        return productRepository.findById(id).get();
     }
 
 }

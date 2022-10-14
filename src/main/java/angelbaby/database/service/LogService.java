@@ -29,7 +29,6 @@ public class LogService {
     @Autowired
     private UserRepository userRepository;
 
-
     public List<Log> getAll() {
         return logRepository.findAll();
     }
@@ -40,7 +39,6 @@ public class LogService {
         Log log = new Log();
         String type = (String) obj.get("type");
         log.setType(type);
-
 
         if (type.equals("inbound")) {
             log.setProductInDate(new SimpleDateFormat("dd/MM/yyyy").parse((String) obj.get("productInDate")));
@@ -75,6 +73,10 @@ public class LogService {
         log.setUser(userRepository.findById(Long.valueOf((Integer) obj.get("userID"))).get());
 
         return logRepository.save(log);
+    }
+
+    public Log findByID(Long id) {
+        return logRepository.findById(id).get();
     }
 
 }

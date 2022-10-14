@@ -1,5 +1,6 @@
 package angelbaby.database.controller;
 
+import angelbaby.database.model.Location;
 import angelbaby.database.model.Stock;
 import angelbaby.database.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,10 @@ public class StockController {
     @PutMapping
     public Stock update(@RequestBody String payload) throws ParseException {
         return service.update(payload);
+    }
+
+    @GetMapping("/{id}")
+    public Stock findByID(@PathVariable Long id) {
+        return service.findByID(id);
     }
 }

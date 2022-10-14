@@ -1,5 +1,6 @@
 package angelbaby.database.controller;
 
+import angelbaby.database.model.Location;
 import angelbaby.database.model.Log;
 import angelbaby.database.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,10 @@ public class LogController {
     @PostMapping
     public Log create(@RequestBody String payload) throws ParseException {
         return service.create(payload);
+    }
+
+    @GetMapping("/{id}")
+    public Log findByID(@PathVariable Long id) {
+        return service.findByID(id);
     }
 }

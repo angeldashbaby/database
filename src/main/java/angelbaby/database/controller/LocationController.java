@@ -27,4 +27,9 @@ public class LocationController {
     public Location update(@RequestBody String payload) {
         return service.update(payload);
     }
+
+    @GetMapping("/{id}")
+    public Location findByID(@PathVariable Long id) {
+        return service.findByID(id);
+    }
 }
