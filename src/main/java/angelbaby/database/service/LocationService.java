@@ -1,13 +1,16 @@
 package angelbaby.database.service;
 
+import angelbaby.database.dto.LocationDto;
 import angelbaby.database.model.Location;
 import angelbaby.database.repository.LocationRepository;
 import angelbaby.database.repository.ProductRepository;
 import angelbaby.database.repository.StockRepository;
 import org.json.JSONObject;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,8 +25,15 @@ public class LocationService {
     @Autowired
     private ProductRepository productRepository;
 
-    public List<Location> getAll() {
-        return locationRepository.findAll();
+    @Autowired
+    private ModelMapper modelMapper;
+
+    public List<LocationDto> getAll() {
+        List<LocationDto> loli = new ArrayList<>();
+        for (Location i: locationRepository.findAll()) {
+            loli.add(new LocationDto(i));
+        }
+        return loli;
     }
 
     public Location create(String payload) {

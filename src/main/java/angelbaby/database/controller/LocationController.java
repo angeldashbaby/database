@@ -1,5 +1,6 @@
 package angelbaby.database.controller;
 
+import angelbaby.database.dto.LocationDto;
 import angelbaby.database.model.Location;
 import angelbaby.database.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ public class LocationController {
     private LocationService service;
 
     @GetMapping
-    public List<Location> getAll() {
+    public List<LocationDto> getAll() {
         return service.getAll();
     }
 
