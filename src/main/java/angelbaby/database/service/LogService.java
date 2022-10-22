@@ -2,10 +2,8 @@ package angelbaby.database.service;
 
 import angelbaby.database.model.Log;
 import angelbaby.database.model.Stock;
-import angelbaby.database.repository.LogRepository;
-import angelbaby.database.repository.ProductRepository;
-import angelbaby.database.repository.StockRepository;
-import angelbaby.database.repository.UserRepository;
+import angelbaby.database.model.Location;
+import angelbaby.database.repository.*;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +26,9 @@ public class LogService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private LocationRepository locationRepository;
 
     public List<Log> getAll() {
         return logRepository.findAll();
@@ -55,6 +56,10 @@ public class LogService {
             log.setIOQuantity(quantity);
             log.setTotalQuantity(quantity); // total quantity = in quantity = stock quantity
 
+            if (obj.has("locationID")) {
+                Location location = locationRepository.findById(obj.getLong("locationID")).get();
+                location.setStockID(stock);
+            }
         } else if (type.equals("outbound")) {
             log.setProductOutDate(new SimpleDateFormat("dd/MM/yyyy").parse((String) obj.get("productOutDate")));
 
@@ -69,9 +74,7 @@ public class LogService {
             log.setIOQuantity(IOQuantity);
             log.setTotalQuantity(totalQuantity);
         }
-
         log.setUser(userRepository.findById(Long.valueOf((Integer) obj.get("userID"))).get());
-
         return logRepository.save(log);
     }
 
