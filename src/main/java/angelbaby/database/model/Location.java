@@ -23,4 +23,9 @@ public class Location {
     @JoinColumn(name = "stockID", referencedColumnName = "stockID")
     private Stock stockID;
 
+    @Nullable
+    @OneToOne(targetEntity = Product.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "itemID", referencedColumnName = "itemID")
+    private Product itemID;
+
 }
