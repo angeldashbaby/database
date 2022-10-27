@@ -49,7 +49,7 @@ public class LocationService {
         JSONObject obj = new JSONObject(payload);
         Location location = locationRepository.findById(Long.valueOf((Integer) obj.get("locationID"))).get();
         if (obj.has("shelfID")) location.setShelfID((Integer) obj.get("shelfID"));
-        if (obj.has("position")) location.setPosition((String) obj.get("itemID"));
+        if (obj.has("position")) location.setPosition((String) obj.get("position"));
         if (obj.has("stockID")) location.setStockID(stockRepository.findById(Long.valueOf((Integer) obj.get("stockID"))).get());
         return locationRepository.save(location);
     }
