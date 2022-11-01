@@ -81,6 +81,10 @@ public class LogService {
                 }
             }
 
+            if (stock == null) {
+                return null;
+            }
+
             int totalQuantity = stock.getQuantity();
 
             log.setStock(stock);
