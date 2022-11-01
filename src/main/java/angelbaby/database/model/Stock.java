@@ -23,8 +23,13 @@ public class Stock {
     @JoinColumn(name = "itemID", referencedColumnName = "itemID")
     private Product item;
 
-    public void useQuantity(int amount) {
-        quantity -= amount;
+    public boolean useQuantity(int amount) {
+        if (quantity - amount >= 0) {
+            quantity -= amount;
+            return true;
+        }
+        return false;
+
     }
 
 }

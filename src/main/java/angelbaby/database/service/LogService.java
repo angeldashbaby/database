@@ -63,11 +63,24 @@ public class LogService {
         } else if (type.equals("outbound")) {
             log.setProductOutDate(new SimpleDateFormat("dd/MM/yyyy").parse((String) obj.get("productOutDate")));
 
-            Stock stock = stockRepository.findById(Long.valueOf((Integer) obj.get("stockID"))).get();
-
+//            Stock stock = stockRepository.findById(Long.valueOf((Integer) obj.get("stockID"))).get();
+            List<Stock> list = stockRepository.findAll();
             Integer IOQuantity = (Integer) obj.get("IOQuantity");
-            stock.useQuantity(IOQuantity); // subtract from stock
-            stockRepository.save(stock);
+            Stock stock = null;
+            for (Stock s : list) { // find every stock
+                // if item is not the same, skip stock
+                if (s.getItem().getItemID() != obj.getLong("itemID")) {
+                    continue;
+                }
+
+                if (s.useQuantity(IOQuantity)) // subtract from stock
+                {
+                    stock = s;
+                    stockRepository.save(stock);
+                    break;
+                }
+            }
+
             int totalQuantity = stock.getQuantity();
 
             log.setStock(stock);
