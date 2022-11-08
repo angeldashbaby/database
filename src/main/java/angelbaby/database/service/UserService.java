@@ -80,6 +80,7 @@ public class UserService {
 
         response.setSuccess(true);
         response.setError("");
+        response.setUserId(user.getUserID());
         return response;
     }
 

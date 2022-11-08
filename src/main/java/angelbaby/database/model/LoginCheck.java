@@ -9,4 +9,5 @@ public class LoginCheck {
 
     private boolean success;
     private String error;
+    private long userId;
 }
