@@ -91,7 +91,7 @@ public class LogService {
             log.setIOQuantity(IOQuantity);
             log.setTotalQuantity(totalQuantity);
         }
-        log.setUser(userRepository.findById(Long.valueOf((Integer) obj.get("userID"))).get());
+        log.setUser(userRepository.findById(Long.valueOf(obj.getInt("userID"))).get());
         return logRepository.save(log);
     }
 
