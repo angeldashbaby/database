@@ -19,4 +19,10 @@ public class Product {
     private String description;
     private String supplierName;
 
+    public Product(Long itemID, String name, String description, String supplierName) {
+        this.itemID = itemID;
+        this.name = name;
+        this.description = description;
+        this.supplierName = supplierName;
+    }
 }

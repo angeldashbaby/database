@@ -32,4 +32,10 @@ public class Stock {
 
     }
 
+    public Stock(Long stockID, Date expire, int quantity, Product item) {
+        this.stockID = stockID;
+        this.expire = expire;
+        this.quantity = quantity;
+        this.item = item;
+    }
 }
