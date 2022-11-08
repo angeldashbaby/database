@@ -5,8 +5,10 @@ import angelbaby.database.model.User;
 import angelbaby.database.repository.UserRepository;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -22,6 +24,10 @@ public class UserService {
 
     public User create(String payload) {
         JSONObject obj = new JSONObject(payload);
+        String username = obj.getString("username");
+        if (this.userRepository.findByUsername(username) != null) { // username ซ้ำ
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already exists!");
+        }
         User user = new User();
         user.setUsername((String) obj.get("username"));
         user.setPassword((String) obj.get("password"));
