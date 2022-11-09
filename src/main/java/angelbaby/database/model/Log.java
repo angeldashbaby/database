@@ -28,6 +28,17 @@ public class Log {
     private int IOQuantity;
     private int totalQuantity;
 
+    public Log(Long logID, String type, @Nullable Date productInDate, @Nullable Date productOutDate, int IOQuantity, int totalQuantity, Stock stock, User user) {
+        this.logID = logID;
+        this.type = type;
+        this.productInDate = productInDate;
+        this.productOutDate = productOutDate;
+        this.IOQuantity = IOQuantity;
+        this.totalQuantity = totalQuantity;
+        this.stock = stock;
+        this.user = user;
+    }
+
     @OneToOne(targetEntity = Stock.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "stockID", referencedColumnName = "stockID")
     private Stock stock;
