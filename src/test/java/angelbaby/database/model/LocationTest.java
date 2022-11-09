@@ -2,20 +2,37 @@ package angelbaby.database.model;
 
 import org.junit.jupiter.api.Test;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class StockTest {
+class LocationTest {
 
     @Test
-    void useQuantity() {
+    void getLocationID() {
         Product product = new Product(1L,"book", "book test", "aungpor");
         Date date = new Date(2020,11,4);
         Stock stock = new Stock(1L, date,50, product);
-        stock.useQuantity(10);
-        assertEquals(stock.useQuantity(10), true);
+        Location location = new Location(1L, 1, "position1", stock);
+        assertEquals(location.getLocationID(),1L);
+    }
+
+    @Test
+    void getShelfID() {
+        Product product = new Product(1L,"book", "book test", "aungpor");
+        Date date = new Date(2020,11,4);
+        Stock stock = new Stock(1L, date,50, product);
+        Location location = new Location(1L, 1, "position1", stock);
+        assertEquals(location.getShelfID(),1);
+    }
+
+    @Test
+    void getPosition() {
+        Product product = new Product(1L,"book", "book test", "aungpor");
+        Date date = new Date(2020,11,4);
+        Stock stock = new Stock(1L, date,50, product);
+        Location location = new Location(1L, 1, "position1", stock);
+        assertEquals(location.getPosition(),"position1");
     }
 
     @Test
@@ -23,31 +40,39 @@ class StockTest {
         Product product = new Product(1L,"book", "book test", "aungpor");
         Date date = new Date(2020,11,4);
         Stock stock = new Stock(1L, date,50, product);
-        assertEquals(stock.getStockID(), 1L);
+        Location location = new Location(1L, 1, "position1", stock);
+        assertEquals(location.getStockID().getStockID(),1L);
     }
 
     @Test
-    void getExpire() {
+    void setLocationID() {
         Product product = new Product(1L,"book", "book test", "aungpor");
         Date date = new Date(2020,11,4);
         Stock stock = new Stock(1L, date,50, product);
-        assertEquals(stock.getExpire(), new Date(2020,11,4));
+        Location location = new Location(1L, 1, "position1", stock);
+        location.setLocationID(2l);
+        assertEquals(location.getLocationID(),2l);
     }
 
     @Test
-    void getQuantity() {
+    void setShelfID() {
         Product product = new Product(1L,"book", "book test", "aungpor");
         Date date = new Date(2020,11,4);
         Stock stock = new Stock(1L, date,50, product);
-        assertEquals(stock.getQuantity(), 50);
+        Location location = new Location(1L, 1, "position1", stock);
+        location.setShelfID(2);
+        assertEquals(location.getShelfID(),2);
     }
 
     @Test
-    void getItemId() {
+    void setPosition() {
         Product product = new Product(1L,"book", "book test", "aungpor");
         Date date = new Date(2020,11,4);
         Stock stock = new Stock(1L, date,50, product);
-        assertEquals(stock.getItem().getItemID(), 1L);
+        Location location = new Location(1L, 1, "position1", stock);
+        location.setPosition("position2");
+        assertEquals(location.getPosition(),"position2");
+
     }
 
     @Test
@@ -55,35 +80,8 @@ class StockTest {
         Product product = new Product(1L,"book", "book test", "aungpor");
         Date date = new Date(2020,11,4);
         Stock stock = new Stock(1L, date,50, product);
-        stock.setStockID(2L);
-        assertEquals(stock.getStockID(), 2L);
+        Location location = new Location(1L, 1, "position1", stock);
+        location.getStockID().setStockID(2l);
+        assertEquals(location.getStockID().getStockID(),2l);
     }
-
-    @Test
-    void setExpire() {
-        Product product = new Product(1L,"book", "book test", "aungpor");
-        Date date = new Date(2020,11,4);
-        Stock stock = new Stock(1L, date,50, product);
-        stock.setExpire(new Date(2020,11,4));
-        assertEquals(stock.getExpire(), new Date(2020,11,4));
-    }
-
-    @Test
-    void setQuantity() {
-        Product product = new Product(1L,"book", "book test", "aungpor");
-        Date date = new Date(2020,11,4);
-        Stock stock = new Stock(1L, date,50, product);
-        stock.setQuantity(100);
-        assertEquals(stock.getQuantity(), 100);
-    }
-
-    @Test
-    void setItemId() {
-        Product product = new Product(1L,"book", "book test", "aungpor");
-        Date date = new Date(2020,11,4);
-        Stock stock = new Stock(1L, date,50, product);
-        stock.getItem().setItemID(3L);
-        assertEquals(stock.getItem().getItemID(), 3L);
-    }
-
 }

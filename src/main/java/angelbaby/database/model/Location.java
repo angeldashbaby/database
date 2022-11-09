@@ -23,6 +23,13 @@ public class Location {
     @NonNull
     private String position;
 
+    public Location(Long locationID, @NonNull int shelfID, @NonNull String position, @Nullable Stock stockID) {
+        this.locationID = locationID;
+        this.shelfID = shelfID;
+        this.position = position;
+        this.stockID = stockID;
+    }
+
     @Nullable
     @OneToOne(targetEntity = Stock.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "stockID", referencedColumnName = "stockID")
